@@ -1,0 +1,112 @@
+#include "tokens.hpp"
+#include <iostream>
+#include <sstream>
+
+namespace ilox {
+
+std::string TokenTypeToString(TokenType type) {
+  switch (type) {
+  case TokenType::LPAREN:
+    return "(";
+  case TokenType::RPAREN:
+    return ")";
+  case TokenType::LBRACE:
+    return "{";
+  case TokenType::RBRACE:
+    return "}";
+  case TokenType::COMMA:
+    return ",";
+  case TokenType::DOT:
+    return ".";
+  case TokenType::MINUS:
+    return "-";
+  case TokenType::PLUS:
+    return "+";
+  case TokenType::SEMI_COLON:
+    return ";";
+  case TokenType::SLASH:
+    return "/";
+  case TokenType::STAR:
+    return "*";
+  case TokenType::BANG:
+    return "!";
+  case TokenType::BANG_EQUAL:
+    return "!=";
+  case TokenType::EQUAL:
+    return "=";
+  case TokenType::EQUAL_EQUAL:
+    return "==";
+  case TokenType::GREATER:
+    return ">";
+  case TokenType::GREATER_EQUAL:
+    return ">=";
+  case TokenType::LESS:
+    return "<";
+  case TokenType::LESS_EQUAL:
+    return "<=";
+  case TokenType::IDENTIFIER:
+    return "IDENT";
+  case TokenType::STRING:
+    return "STRING";
+  case TokenType::NUMBER:
+    return "NUMBER";
+  case TokenType::AND:
+    return "AND";
+  case TokenType::CLASS:
+    return "CLASS";
+  case TokenType::ELSE:
+    return "ELSE";
+  case TokenType::FALSE:
+    return "FALSE";
+  case TokenType::FUN:
+    return "FUN";
+  case TokenType::FOR:
+    return "FOR";
+  case TokenType::IF:
+    return "IF";
+  case TokenType::NIL:
+    return "NIL";
+  case TokenType::OR:
+    return "OR";
+  case TokenType::PRINT:
+    return "PRINT";
+  case TokenType::RETURN:
+    return "RETURN";
+  case TokenType::SUPER:
+    return "SUPER";
+  case TokenType::THIS:
+    return "THIS";
+  case TokenType::TRUE:
+    return "TRUE";
+  case TokenType::VAR:
+    return "VAR";
+  case TokenType::WHILE:
+    return "WHILE";
+
+  default:
+    return "Unknown Token";
+  }
+}
+
+std::string Token::String() {
+  std::stringstream value;
+  std::string literal_value;
+  std::string type = ilox::TokenTypeToString(this->type);
+
+  switch (this->type) {
+  case TokenType::STRING:
+    literal_value = std::get<std::string>(this->literal);
+    break;
+  case TokenType::NUMBER:
+    literal_value = std::get<int>(this->literal);
+    break;
+  default:
+    literal_value = "";
+  }
+  value << "Token : " << this->lexeme << " Type : " << type
+        << " Literal : " << literal_value;
+
+  return value.str();
+}
+
+} // namespace ilox
