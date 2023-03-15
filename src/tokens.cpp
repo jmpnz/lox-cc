@@ -1,4 +1,5 @@
 #include "tokens.hpp"
+#include "types.hpp"
 #include <iostream>
 #include <sstream>
 
@@ -95,16 +96,16 @@ std::string Token::String() {
 
   switch (this->type) {
   case TokenType::STRING:
-    literal_value = std::get<std::string>(this->literal);
+    literal_value = std::get<std::string>(this->literal.value());
     break;
   case TokenType::NUMBER:
-    literal_value = std::get<int>(this->literal);
+    literal_value = std::get<int>(this->literal.value());
     break;
   default:
     literal_value = "";
   }
-  value << "Token : " << this->lexeme << " Type : " << type
-        << " Literal : " << literal_value;
+  value << "Line : " << this->line << " Token : " << this->lexeme
+        << " Type : " << type << " Literal : " << literal_value << '\n';
 
   return value.str();
 }

@@ -1,5 +1,6 @@
 #ifndef TOKENS_HPP
 #define TOKENS_HPP
+#include "types.hpp"
 #include <string>
 #include <unordered_map>
 
@@ -65,14 +66,18 @@ std::string TokenTypeToString(TokenType type);
 class Token {
   TokenType type;
   std::string lexeme;
-  std::variant<int, std::string, char> literal;
+  OptionalLiteral literal;
   int line;
 
 public:
   // Construct class for our token.
-  Token(TokenType type, std::string lexeme,
-        std::variant<int, std::string, char> literal, int line)
+  Token(TokenType type, std::string lexeme, OptionalLiteral literal, int line)
       : type(type), lexeme(lexeme), literal(literal), line(line) {}
+
+  // General Getters
+  TokenType Type() { return this->type; }
+  OptionalLiteral Literal() { return this->literal; }
+  std::string Lexeme() { return this->lexeme; }
 
   // String prints a string representation of the token.
   std::string String();

@@ -8,8 +8,6 @@
 
 int main(int argc, char *argv[]) {
 
-  auto tok = ilox::Token(ilox::TokenType::STRING, "fun", "fun", 0);
-  std::cout << tok.String();
   if (argc > 2) {
     std::cout << UsageMessage << std::endl;
     exit(1);
