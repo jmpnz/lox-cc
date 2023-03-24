@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace ilox {
+namespace lox {
 
 void DebugView(std::vector<std::string> debug_messages) {
   for (auto &msg : debug_messages) {
@@ -31,4 +31,4 @@ std::vector<std::string> ReadScriptFile(std::string filename) {
   return lines;
 }
 
-} // namespace ilox
+} // namespace lox

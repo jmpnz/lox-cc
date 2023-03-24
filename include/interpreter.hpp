@@ -1,8 +1,8 @@
 #ifndef INTERPRETER_HPP
 #define INTERPRETER_HPP
 
-namespace ilox {
+namespace lox {
 void RunPrompt();
-} // namespace ilox
+} // namespace lox
 
 #endif

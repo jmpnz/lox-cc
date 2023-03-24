@@ -2,8 +2,8 @@
 #define USAGE_HPP
 
 const char *UsageMessage = R"(
-    ilox interpreter usage guide :
-    ilox script.lox
+    lox interpreter usage guide :
+    lox script.lox
 )";
 
 #endif

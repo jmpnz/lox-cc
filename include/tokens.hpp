@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace ilox {
+namespace lox {
 
 // Enum TokenType is used to assign a type to each token.
 enum class TokenType {
@@ -83,6 +83,6 @@ public:
   std::string String();
 };
 
-} // namespace ilox
+} // namespace lox
 
 #endif

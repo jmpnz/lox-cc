@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-namespace ilox {
+namespace lox {
 
 void DebugView(std::vector<std::string> debug_messages);
 
@@ -11,6 +11,6 @@ void DebugMessage(const char *message);
 
 std::vector<std::string> ReadScriptFile(std::string filename);
 
-} // namespace ilox
+} // namespace lox
 
 #endif

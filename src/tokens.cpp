@@ -3,7 +3,7 @@
 #include <iostream>
 #include <sstream>
 
-namespace ilox {
+namespace lox {
 
 std::string TokenTypeToString(TokenType type) {
   switch (type) {
@@ -83,6 +83,8 @@ std::string TokenTypeToString(TokenType type) {
     return "VAR";
   case TokenType::WHILE:
     return "WHILE";
+  case TokenType::L_EOF:
+    return "EOF";
   default:
     return "Unknown Token";
   }
@@ -91,7 +93,8 @@ std::string TokenTypeToString(TokenType type) {
 std::string Token::String() {
   std::stringstream value;
   std::string literal_value;
-  std::string type = ilox::TokenTypeToString(this->type);
+  std::string type = lox::TokenTypeToString(this->type);
+
 
   switch (this->type) {
   case TokenType::STRING:
@@ -108,4 +111,4 @@ std::string Token::String() {
   return value.str();
 }
 
-} // namespace ilox
+} // namespace lox

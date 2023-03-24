@@ -1,6 +1,6 @@
 #include "types.hpp"
 
-namespace ilox {
+namespace lox {
 
 OptionalLiteral NewLiteral(int value) {
   return OptionalLiteral(std::in_place, value);
@@ -17,4 +17,4 @@ OptionalLiteral NewLiteral(char value) {
 OptionalLiteral NewLiteral(std::string value) {
   return OptionalLiteral(std::in_place, value);
 }
-} // namespace ilox
+} // namespace lox

@@ -12,7 +12,7 @@ bool IsAlpha(char ch) { return isalpha(ch); }
 
 bool IsNumeric(char ch) { return isnumber(ch); }
 
-namespace ilox {
+namespace lox {
 
 std::vector<Token> Scanner::ScanTokens() {
   int line = 0;
@@ -110,6 +110,9 @@ void Scanner::ScanToken() {
   case '\n':
     line++;
     break;
+  case '"':
+    ScanString();
+    break;
   default:
     if (IsNumeric(c)) {
       ScanNumber();
@@ -136,6 +139,22 @@ void Scanner::ScanNumber() {
       NewOptionalLiteral(TokenType::NUMBER, source.substr(start, current)));
 }
 
+void Scanner::ScanString() {
+  while(Peek() != '"' && !ReachedEnd()) {
+    if (Peek() == '\n') line++;
+    Advance();
+  }
+  if (ReachedEnd()) {
+    std::cerr << line << "Unterminated string";
+    return;
+  }
+  // Eat the closing "
+  Advance();
+  // Trim surrounding quotes
+  std::string value = source.substr(start + 1, current - 1);
+  AddToken(TokenType::STRING,value);
+}
+
 OptionalLiteral Scanner::NewOptionalLiteral(TokenType type,
                                             std::string lexeme) {
   switch (type) {
@@ -160,4 +179,4 @@ void Lex(std::string code) {
   }
 }
 
-} // namespace ilox
+} // namespace lox

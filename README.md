@@ -1,11 +1,16 @@
 # lox Compiler Suite
 
-This project contains a C++ implementation of a compiler
-and interpreter for the Lox language created by Robert Nystrom following his great book [Crafting Interpreters](https://craftinginterpreters.com/).
+Implementation of an Interpreters and compiler for the Lox language
+created by Robert Nystrom in his book [Crafting Interpreters](https://craftinginterpreters.com/)
 
-## Build
+## Usage
 
-You can build the `ilox` binary which provides an interpreter for Lox or `clox` which provides an implementation of a bytecode compiler and VM for Lox.
+```sh
 
-Good ol' `make` is used to build both `ilox` and `clox`, navigate to the directory for the which project
-you want to build and run `make`.
+$ mkdir build && cd build
+$ cmake .. && make
+```
+
+The build step creates two binaries `lox` the interpreter REPL
+and `clox` the bytecode compiler.
+

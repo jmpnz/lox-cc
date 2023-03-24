@@ -12,9 +12,9 @@ int main(int argc, char *argv[]) {
     std::cout << UsageMessage << std::endl;
     exit(1);
   } else if (argc == 2) {
-    auto lines = ilox::ReadScriptFile(argv[1]);
-    ilox::DebugView(lines);
+    auto lines = lox::ReadScriptFile(argv[1]);
+    lox::DebugView(lines);
   } else {
-    ilox::RunPrompt();
+    lox::RunPrompt();
   }
 }

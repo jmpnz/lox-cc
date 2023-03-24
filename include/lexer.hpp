@@ -4,7 +4,7 @@
 #include "types.hpp"
 #include <string>
 #include <vector>
-namespace ilox {
+namespace lox {
 
 // Scanner class will implement a lexer for our language here.
 class Scanner {
@@ -46,6 +46,10 @@ public:
   bool Match(char expected);
   // ScanNumber scans a numerical value.
   void ScanNumber();
+  // ScanString scans inline strings.
+  void ScanString();
+  // ScanIdentifier scans raw identifiers.
+  void ScanIdentifier();
   // Peek returns the next token by performing a lookahead.
   char Peek();
 };
@@ -53,6 +57,6 @@ public:
 // Forward declaration for the Lex function which outputs a list of tokens.
 void Lex(std::string);
 
-} // namespace ilox
+} // namespace lox
 
 #endif // LEXER_HPP

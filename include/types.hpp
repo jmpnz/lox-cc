@@ -5,7 +5,7 @@
 #include <string>
 #include <variant>
 
-namespace ilox {
+namespace lox {
 using Literal = std::variant<int, float, std::string, char>;
 using OptionalLiteral = std::optional<Literal>;
 
@@ -14,7 +14,7 @@ OptionalLiteral NewLiteral(float value);
 OptionalLiteral NewLiteral(char value);
 OptionalLiteral NewLiteral(std::string value);
 
-} // namespace ilox
+} // namespace lox
 
 // Literal type defintion
 

@@ -1,8 +1,8 @@
 #include <iostream>
-namespace ilox {
+namespace lox {
 
 void RunPrompt() {
-  std::cout << "This is an ilox prompt" << '\n';
+  std::cout << "This is an lox prompt" << '\n';
   while (true) {
     std::string line;
     std::cout << "> ";
@@ -15,4 +15,4 @@ void RunPrompt() {
   }
 }
 
-} // namespace ilox
+} // namespace lox
