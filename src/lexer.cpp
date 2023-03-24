@@ -94,17 +94,53 @@ void Scanner::ScanToken() {
   case '>':
     AddToken(Match('=') ? TokenType::GREATER_EQUAL : TokenType::GREATER);
     break;
+  case '/':
+    if (Match('/')) {
+      while (Peek() != '\n' && !this->ReachedEnd()) {
+        Advance();
+      }
+    } else {
+      AddToken(TokenType::SLASH);
+    }
+    break;
+  case ' ':
+  case '\r':
+  case '\t':
+    break;
+  case '\n':
+    line++;
+    break;
   default:
-    std::cerr << "Unexpected character";
+    if (IsNumeric(c)) {
+      ScanNumber();
+    } else {
+      std::cerr << "Unexpected character :" << c;
+    }
     break;
   }
+}
+
+char Scanner::Peek() {
+  if (ReachedEnd())
+    return '\0';
+  return source.at(current);
+}
+
+void Scanner::ScanNumber() {
+  while (IsNumeric(Peek())) {
+    Advance();
+  }
+  std::cout << "Debug: " << source.substr(start, current) << '\n';
+  AddToken(
+      TokenType::NUMBER,
+      NewOptionalLiteral(TokenType::NUMBER, source.substr(start, current)));
 }
 
 OptionalLiteral Scanner::NewOptionalLiteral(TokenType type,
                                             std::string lexeme) {
   switch (type) {
   case TokenType::NUMBER:
-    return NewLiteral(std::stof(lexeme));
+    return NewLiteral(atoi(lexeme.c_str()));
   case TokenType::STRING:
     return NewLiteral(lexeme.substr(1, lexeme.size() - 2));
   default:

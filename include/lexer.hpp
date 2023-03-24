@@ -44,6 +44,10 @@ public:
   OptionalLiteral NewOptionalLiteral(TokenType type, std::string lexeme);
   // Match is a conditional advance used to process multi char tokens.
   bool Match(char expected);
+  // ScanNumber scans a numerical value.
+  void ScanNumber();
+  // Peek returns the next token by performing a lookahead.
+  char Peek();
 };
 
 // Forward declaration for the Lex function which outputs a list of tokens.

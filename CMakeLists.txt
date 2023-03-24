@@ -4,7 +4,7 @@ project(lox-compiler-suite LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 # compiler options
-add_compile_options(-g -fPIC)
+add_compile_options(-g -Wall -fPIC)
 # lots of warnings and errors.
 add_compile_options(-Wall -Wextra -pedantic -Werror)
 

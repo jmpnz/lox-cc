@@ -83,7 +83,6 @@ std::string TokenTypeToString(TokenType type) {
     return "VAR";
   case TokenType::WHILE:
     return "WHILE";
-
   default:
     return "Unknown Token";
   }
@@ -102,10 +101,9 @@ std::string Token::String() {
     literal_value = std::get<int>(this->literal.value());
     break;
   default:
-    literal_value = "";
+    literal_value = type;
   }
-  value << "Line : " << this->line << " Token : " << this->lexeme
-        << " Type : " << type << " Literal : " << literal_value << '\n';
+  value << "Line : " << line <<" Type : " << type << " Literal : " << literal_value << '\n';
 
   return value.str();
 }
