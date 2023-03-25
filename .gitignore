@@ -7,6 +7,7 @@
 
 ## Caches
 .cache/*
+*.idx
 
 # Compiled Object files
 *.slo
