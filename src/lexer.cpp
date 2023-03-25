@@ -2,6 +2,7 @@
 #include "debug.hpp"
 #include "tokens.hpp"
 #include "types.hpp"
+#include <cctype>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -11,6 +12,8 @@
 bool IsAlpha(char ch) { return isalpha(ch); }
 
 bool IsNumeric(char ch) { return isnumber(ch); }
+
+bool IsAlphaNumeric(char ch) { return isalnum(ch); }
 
 namespace lox {
 
@@ -32,7 +35,7 @@ char Scanner::Advance() { return this->source.at(current++); }
 void Scanner::AddToken(TokenType type) { this->AddToken(type, std::nullopt); }
 
 void Scanner::AddToken(TokenType type, OptionalLiteral literal) {
-  auto text = this->source.substr(start, current);
+  auto text = this->source.substr(start, current - start);
   this->tokens.push_back(Token(type, text, literal, this->line));
 }
 
@@ -116,6 +119,8 @@ void Scanner::ScanToken() {
   default:
     if (IsNumeric(c)) {
       ScanNumber();
+    } else if (IsAlpha(c)) {
+      ScanIdentifier();
     } else {
       std::cerr << "Unexpected character :" << c;
     }
@@ -151,8 +156,17 @@ void Scanner::ScanString() {
   // Eat the closing "
   Advance();
   // Trim surrounding quotes
-  std::string value = source.substr(start + 1, current - 1);
-  AddToken(TokenType::STRING,value);
+  std::string value = source.substr(start + 1, current - 2);
+  AddToken(TokenType::STRING, NewOptionalLiteral(TokenType::STRING, value));
+}
+
+void Scanner::ScanIdentifier() {
+  while (IsAlphaNumeric(Peek())) {
+    Advance();
+  }
+  std::string identifier = source.substr(start, current);
+  std::cout << "Identifier: " << identifier;
+  AddToken(TokenType::IDENTIFIER, identifier);
 }
 
 OptionalLiteral Scanner::NewOptionalLiteral(TokenType type,
@@ -161,7 +175,7 @@ OptionalLiteral Scanner::NewOptionalLiteral(TokenType type,
   case TokenType::NUMBER:
     return NewLiteral(atoi(lexeme.c_str()));
   case TokenType::STRING:
-    return NewLiteral(lexeme.substr(1, lexeme.size() - 2));
+    return NewLiteral(lexeme);
   default:
     return std::nullopt;
   }

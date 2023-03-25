@@ -32,5 +32,14 @@ TEST_CASE("testing the Lexer scanning routine") {
     for (auto &tok : tokens) {
       std::cout << tok.String();
     }
+    tokens.clear();
+  }
+  SUBCASE("lexing an identifier") {
+    auto scanner = lox::Scanner("lex a = 5;");
+    tokens = scanner.ScanTokens();
+    for (auto &tok : tokens) {
+      std::cout << tok.String();
+    }
+    tokens.clear();
   }
 }

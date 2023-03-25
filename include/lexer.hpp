@@ -48,7 +48,7 @@ public:
   void ScanNumber();
   // ScanString scans inline strings.
   void ScanString();
-  // ScanIdentifier scans raw identifiers.
+  // ScanIdentifier scans identifier.
   void ScanIdentifier();
   // Peek returns the next token by performing a lookahead.
   char Peek();

@@ -103,6 +103,9 @@ std::string Token::String() {
   case TokenType::NUMBER:
     literal_value = std::get<int>(this->literal.value());
     break;
+  case TokenType::IDENTIFIER:
+    literal_value = std::get<std::string>(this->literal.value());
+    break;
   default:
     literal_value = type;
   }
