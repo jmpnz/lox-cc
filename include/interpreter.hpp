@@ -5,7 +5,10 @@
 
 namespace lox {
 
+// Run a given Lox source code.
 auto Run(std::string source) -> void;
+
+// Run the REPL.
 auto RunPrompt() -> void;
 
 } // namespace lox
