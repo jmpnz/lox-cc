@@ -28,34 +28,32 @@ public:
   // ScanTokens will walk the source code string and try to determine at each
   // step which token should be created given the input returning the expected
   // output tokens to the caller as well.
-  std::vector<Token> ScanTokens();
+  auto ScanTokens() -> std::vector<Token>;
   // ScanToken scans the current lexeme outputing the token it represents.
-  void ScanToken();
+  auto ScanToken() -> void;
   // Advance advances the scanner's offset in the source.
-  char Advance();
+  auto Advance() -> char;
   // AddToken is a helper function that builds a token from the current
   // lexeme and adds it to our tokens vector.
-  void AddToken(TokenType type, OptionalLiteral literal);
+  auto AddToken(TokenType type, OptionalLiteral literal) -> void;
   // AddToken without literals.
-  void AddToken(TokenType type);
+  auto AddToken(TokenType type) -> void;
   // ReachedEnd will check if we reached the end of the source being scanned.
-  bool ReachedEnd();
+  auto ReachedEnd() -> bool;
   // NewOptionalLiteral builds an optional literal value given a token type.
-  OptionalLiteral NewOptionalLiteral(TokenType type, std::string lexeme);
+  auto NewOptionalLiteral(TokenType type, std::string lexeme)
+      -> OptionalLiteral;
   // Match is a conditional advance used to process multi char tokens.
-  bool Match(char expected);
+  auto Match(char expected) -> bool;
   // ScanNumber scans a numerical value.
-  void ScanNumber();
+  auto ScanNumber() -> void;
   // ScanString scans inline strings.
-  void ScanString();
+  auto ScanString() -> void;
   // ScanIdentifier scans identifier.
-  void ScanIdentifier();
+  auto ScanIdentifier() -> void;
   // Peek returns the next token by performing a lookahead.
-  char Peek();
+  auto Peek() -> char;
 };
-
-// Forward declaration for the Lex function which outputs a list of tokens.
-void Lex(std::string);
 
 } // namespace lox
 

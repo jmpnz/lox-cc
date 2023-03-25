@@ -9,10 +9,10 @@ namespace lox {
 using Literal = std::variant<int, float, std::string, char>;
 using OptionalLiteral = std::optional<Literal>;
 
-OptionalLiteral NewLiteral(int value);
-OptionalLiteral NewLiteral(float value);
-OptionalLiteral NewLiteral(char value);
-OptionalLiteral NewLiteral(std::string value);
+auto NewLiteral(int value) -> OptionalLiteral;
+auto NewLiteral(float value) -> OptionalLiteral;
+auto NewLiteral(char value) -> OptionalLiteral;
+auto NewLiteral(std::string value) -> OptionalLiteral;
 
 } // namespace lox
 

@@ -5,11 +5,11 @@
 
 namespace lox {
 
-void DebugView(std::vector<std::string> debug_messages);
+auto DebugView(std::vector<std::string> debug_messages) -> void;
 
-void DebugMessage(const char *message);
+auto DebugMessage(const char *message) -> void;
 
-std::vector<std::string> ReadScriptFile(std::string filename);
+auto ReadScriptFile(std::string filename) -> std::vector<std::string>;
 
 } // namespace lox
 

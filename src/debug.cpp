@@ -6,16 +6,16 @@
 
 namespace lox {
 
-void DebugView(std::vector<std::string> debug_messages) {
+auto DebugView(std::vector<std::string> debug_messages) -> void {
   for (auto &msg : debug_messages) {
     std::cout << msg << '\n';
   }
   std::cout << std::endl;
 }
 
-void DebugMessage(const char *message) { std::cout << message << '\n'; }
+auto DebugMessage(const char *message) -> void { std::cout << message << '\n'; }
 
-std::vector<std::string> ReadScriptFile(std::string filename) {
+auto ReadScriptFile(std::string filename) -> std::vector<std::string> {
   std::ifstream file{filename};
 
   if (!file.is_open()) {

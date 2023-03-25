@@ -58,7 +58,19 @@ enum class TokenType {
 
 };
 
-std::string TokenTypeToString(TokenType type);
+// Keywords defines the Lox language keywords.
+const static std::unordered_map<std::string, TokenType> Keywords = {
+    {"and", TokenType::AND},       {"class", TokenType::CLASS},
+    {"else", TokenType::ELSE},     {"false", TokenType::FALSE},
+    {"for", TokenType::FOR},       {"fun", TokenType::FUN},
+    {"if", TokenType::IF},         {"nil", TokenType::NIL},
+    {"or", TokenType::OR},         {"print", TokenType::PRINT},
+    {"return", TokenType::RETURN}, {"super", TokenType::SUPER},
+    {"this", TokenType::THIS},     {"true", TokenType::TRUE},
+    {"var", TokenType::VAR},       {"while", TokenType::WHILE},
+};
+
+auto TokenTypeToString(TokenType type) -> std::string;
 
 // Token represents a single token in our code which is a string literal
 // with a wrapped token type (keyword, identifier, numeric..), position
@@ -75,12 +87,12 @@ public:
       : type(type), lexeme(lexeme), literal(literal), line(line) {}
 
   // General Getters
-  TokenType Type() { return this->type; }
-  OptionalLiteral Literal() { return this->literal; }
-  std::string Lexeme() { return this->lexeme; }
+  auto Type() -> TokenType { return this->type; }
+  auto Literal() -> OptionalLiteral { return this->literal; }
+  auto Lexeme() -> std::string { return this->lexeme; }
 
   // String prints a string representation of the token.
-  std::string String();
+  auto String() -> std::string;
 };
 
 } // namespace lox

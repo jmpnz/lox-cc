@@ -2,19 +2,19 @@
 
 namespace lox {
 
-OptionalLiteral NewLiteral(int value) {
+auto NewLiteral(int value) -> OptionalLiteral {
   return OptionalLiteral(std::in_place, value);
 }
 
-OptionalLiteral NewLiteral(float value) {
+auto NewLiteral(float value) -> OptionalLiteral {
   return OptionalLiteral(std::in_place, value);
 }
 
-OptionalLiteral NewLiteral(char value) {
+auto NewLiteral(char value) -> OptionalLiteral {
   return OptionalLiteral(std::in_place, value);
 }
 
-OptionalLiteral NewLiteral(std::string value) {
+auto NewLiteral(std::string value) -> OptionalLiteral {
   return OptionalLiteral(std::in_place, value);
 }
 } // namespace lox

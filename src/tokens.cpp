@@ -5,7 +5,7 @@
 
 namespace lox {
 
-std::string TokenTypeToString(TokenType type) {
+auto TokenTypeToString(TokenType type) -> std::string {
   switch (type) {
   case TokenType::LPAREN:
     return "(";
@@ -90,11 +90,10 @@ std::string TokenTypeToString(TokenType type) {
   }
 }
 
-std::string Token::String() {
+auto Token::String() -> std::string {
   std::stringstream value;
   std::string literal_value;
   std::string type = lox::TokenTypeToString(this->type);
-
 
   switch (this->type) {
   case TokenType::STRING:
@@ -109,7 +108,8 @@ std::string Token::String() {
   default:
     literal_value = type;
   }
-  value << "Line : " << line <<" Type : " << type << " Literal : " << literal_value << '\n';
+  value << "Line : " << line << " Type : " << type << " Lexeme : " << lexeme
+        << " Literal : " << literal_value << '\n';
 
   return value.str();
 }

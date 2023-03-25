@@ -9,15 +9,15 @@
 
 // Helper functions for finding whether a character is a numeric, alphabet or
 // else.
-bool IsAlpha(char ch) { return isalpha(ch); }
+auto IsAlpha(char ch) -> bool { return isalpha(ch); }
 
-bool IsNumeric(char ch) { return isnumber(ch); }
+auto IsNumeric(char ch) -> bool { return isnumber(ch); }
 
-bool IsAlphaNumeric(char ch) { return isalnum(ch); }
+auto IsAlphaNumeric(char ch) -> bool { return isalnum(ch); }
 
 namespace lox {
 
-std::vector<Token> Scanner::ScanTokens() {
+auto Scanner::ScanTokens() -> std::vector<Token> {
   int line = 0;
   while (!ReachedEnd()) {
     start = current;
@@ -28,18 +28,20 @@ std::vector<Token> Scanner::ScanTokens() {
   return this->tokens;
 }
 
-bool Scanner::ReachedEnd() { return current >= source.length(); }
+auto Scanner::ReachedEnd() -> bool { return current >= source.length(); }
 
-char Scanner::Advance() { return this->source.at(current++); }
+auto Scanner::Advance() -> char { return this->source.at(current++); }
 
-void Scanner::AddToken(TokenType type) { this->AddToken(type, std::nullopt); }
+auto Scanner::AddToken(TokenType type) -> void {
+  this->AddToken(type, std::nullopt);
+}
 
-void Scanner::AddToken(TokenType type, OptionalLiteral literal) {
+auto Scanner::AddToken(TokenType type, OptionalLiteral literal) -> void {
   auto text = this->source.substr(start, current - start);
   this->tokens.push_back(Token(type, text, literal, this->line));
 }
 
-bool Scanner::Match(char expected) {
+auto Scanner::Match(char expected) -> bool {
   if (this->ReachedEnd()) {
     return false;
   }
@@ -50,7 +52,7 @@ bool Scanner::Match(char expected) {
   return true;
 }
 
-void Scanner::ScanToken() {
+auto Scanner::ScanToken() -> void {
   char c = Advance();
   switch (c) {
     // Single char tokens.
@@ -128,25 +130,25 @@ void Scanner::ScanToken() {
   }
 }
 
-char Scanner::Peek() {
+auto Scanner::Peek() -> char {
   if (ReachedEnd())
     return '\0';
   return source.at(current);
 }
 
-void Scanner::ScanNumber() {
+auto Scanner::ScanNumber() -> void {
   while (IsNumeric(Peek())) {
     Advance();
   }
-  std::cout << "Debug: " << source.substr(start, current) << '\n';
   AddToken(
       TokenType::NUMBER,
       NewOptionalLiteral(TokenType::NUMBER, source.substr(start, current)));
 }
 
-void Scanner::ScanString() {
-  while(Peek() != '"' && !ReachedEnd()) {
-    if (Peek() == '\n') line++;
+auto Scanner::ScanString() -> void {
+  while (Peek() != '"' && !ReachedEnd()) {
+    if (Peek() == '\n')
+      line++;
     Advance();
   }
   if (ReachedEnd()) {
@@ -160,17 +162,21 @@ void Scanner::ScanString() {
   AddToken(TokenType::STRING, NewOptionalLiteral(TokenType::STRING, value));
 }
 
-void Scanner::ScanIdentifier() {
+auto Scanner::ScanIdentifier() -> void {
   while (IsAlphaNumeric(Peek())) {
     Advance();
   }
   std::string identifier = source.substr(start, current);
-  std::cout << "Identifier: " << identifier;
-  AddToken(TokenType::IDENTIFIER, identifier);
+  auto iter = Keywords.find(identifier);
+  if (iter == Keywords.end()) {
+    AddToken(TokenType::IDENTIFIER, identifier);
+    return;
+  }
+  AddToken(iter->second);
 }
 
-OptionalLiteral Scanner::NewOptionalLiteral(TokenType type,
-                                            std::string lexeme) {
+auto Scanner::NewOptionalLiteral(TokenType type, std::string lexeme)
+    -> OptionalLiteral {
   switch (type) {
   case TokenType::NUMBER:
     return NewLiteral(atoi(lexeme.c_str()));
@@ -178,18 +184,6 @@ OptionalLiteral Scanner::NewOptionalLiteral(TokenType type,
     return NewLiteral(lexeme);
   default:
     return std::nullopt;
-  }
-}
-
-void Lex(std::string code) {
-  std::cout << code << '\n';
-  for (auto &ch : code) {
-    if (IsAlpha(ch)) {
-      DebugMessage("Got char");
-    }
-    if (IsNumeric(ch)) {
-      DebugMessage("Got number");
-    }
   }
 }
 
