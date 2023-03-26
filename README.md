@@ -12,5 +12,5 @@ $ cmake .. && make
 ```
 
 The build step creates two binaries `lox` the interpreter REPL
-and `clox` the bytecode compiler.
+and `test` a test runner.
 
