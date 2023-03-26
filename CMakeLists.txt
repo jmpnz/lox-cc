@@ -15,12 +15,14 @@ add_subdirectory("${PROJECT_SOURCE_DIR}/src")
 find_package(doctest REQUIRED)
 
 # Make test executable
-add_executable(test tests/main.cpp src/lexer.cpp src/debug.cpp src/interpreter.cpp src/tokens.cpp src/types.cpp) 
+add_executable(test tests/main.cpp src/lexer.cpp src/debug.cpp src/interpreter.cpp src/tokens.cpp
+  src/types.cpp src/ast.cpp)
 target_compile_features(test PRIVATE cxx_std_17)
 target_link_libraries(test PRIVATE doctest::doctest)# build the main executable
 
 # build the binary
-add_executable(lox src/main.cpp src/lexer.cpp src/debug.cpp src/interpreter.cpp src/tokens.cpp src/types.cpp)
+add_executable(lox src/main.cpp src/lexer.cpp src/debug.cpp src/interpreter.cpp src/tokens.cpp
+  src/types.cpp src/ast.cpp)
 target_include_directories(lox PUBLIC "${PROJECT_SOURCE_DIR}/include")
 target_link_libraries(lox liblox)
 

@@ -89,7 +89,7 @@ public:
   // General Getters
   auto Type() -> TokenType { return this->type; }
   auto Literal() -> OptionalLiteral { return this->literal; }
-  auto Lexeme() -> std::string { return this->lexeme; }
+  auto Lexeme() const -> std::string { return this->lexeme; }
 
   // String prints a string representation of the token.
   auto String() -> std::string;
