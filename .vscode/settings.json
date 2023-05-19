@@ -3,6 +3,7 @@
         "__config": "cpp",
         "complex": "cpp",
         "string": "cpp",
-        "optional": "cpp"
+        "optional": "cpp",
+        "iosfwd": "cpp"
     }
 }

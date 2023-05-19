@@ -26,6 +26,14 @@ public:
   virtual void Accept(ExprVisitor &visitor) = 0;
 };
 
+// ExprVisitor base class defines an interface for visitors.
+class ExprVisitor {
+public:
+  virtual ~ExprVisitor(){};
+  virtual void VisitBinaryExpr(const BinaryExpr &expr) = 0;
+  virtual void VisitLiteralExpr(const LiteralExpr &expr) = 0;
+};
+
 // BinaryExpr is a concrete implementation of binary expressions.
 class BinaryExpr : public Expr {
 public:
@@ -34,9 +42,9 @@ public:
 
   void Accept(ExprVisitor &visitor) override;
 
-  std::unique_ptr<Expr> left;
+  ExprPtr left;
   Token op;
-  std::unique_ptr<Expr> right;
+  ExprPtr right;
 };
 
 // LiteralExpr is a concrete implementation of Literal expressions.
@@ -46,13 +54,6 @@ public:
   void Accept(ExprVisitor &visitor) override;
 
   std::variant<int, float> value;
-};
-
-class ExprVisitor {
-public:
-  virtual ~ExprVisitor(){};
-  virtual void VisitBinaryExpr(const BinaryExpr &expr) = 0;
-  virtual void VisitLiteralExpr(const LiteralExpr &expr) = 0;
 };
 
 class ASTPrinter : public ExprVisitor {
